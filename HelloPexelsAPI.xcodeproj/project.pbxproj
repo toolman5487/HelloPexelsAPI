@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		151C2DB02D69BF4B0022BAA1 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 151C2DAF2D69BF4B0022BAA1 /* SDWebImage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		151C2D922D68B9D80022BAA1 /* HelloPexelsAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloPexelsAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				151C2DB02D69BF4B0022BAA1 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = HelloPexelsAPI;
 			packageProductDependencies = (
+				151C2DAF2D69BF4B0022BAA1 /* SDWebImage */,
 			);
 			productName = HelloPexelsAPI;
 			productReference = 151C2D922D68B9D80022BAA1 /* HelloPexelsAPI.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = 151C2D892D68B9D80022BAA1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				151C2DAE2D69BF4B0022BAA1 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 151C2D932D68B9D80022BAA1 /* Products */;
 			projectDirPath = "";
@@ -335,6 +344,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		151C2DAE2D69BF4B0022BAA1 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.20.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		151C2DAF2D69BF4B0022BAA1 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 151C2DAE2D69BF4B0022BAA1 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 151C2D8A2D68B9D80022BAA1 /* Project object */;
 }

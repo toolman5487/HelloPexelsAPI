@@ -9,6 +9,10 @@ import UIKit
 
 class PopularVideoTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var duration: UILabel!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userID: UILabel!
+    @IBOutlet weak var videoImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
