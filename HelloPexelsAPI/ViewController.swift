@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 import SDWebImage
 
 class ViewController: UIViewController {
@@ -18,8 +19,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         theTableView.dataSource = self
         theTableView.delegate = self
-        
         fetchData()
+
         // Do any additional setup after loading the view.
     }
     
@@ -45,6 +46,7 @@ class ViewController: UIViewController {
                         print("data ok")
                         DispatchQueue.main.async {
                             self.theTableView.reloadData()
+                            self.playRandomVideo()
                         }
                         
                     } catch {
@@ -60,10 +62,38 @@ class ViewController: UIViewController {
         }
         
     }
+    func playRandomVideo(){
+        print("played ok")
+        if videos.isEmpty{
+            print("no video")
+            return
+        }
+        if let randomVideo = videos.randomElement(){
+            print("random video: \(randomVideo)")
+          if let videoFiles = randomVideo.videoFiles.first {
+              if let randomVideoURL = URL(string: videoFiles.link){
+                  let player = AVPlayer(url: randomVideoURL)
+                  let playerLayer = AVPlayerLayer(player: player)
+                  playerLayer.frame = videoView.bounds
+                  playerLayer.videoGravity = .resizeAspectFill
+                  videoView.layer.sublayers?.filter{$0 is AVPlayerLayer}.forEach{$0.removeFromSuperlayer()}
+                  videoView.layer.addSublayer(playerLayer)
+                  player.play()
+              }
+            }
+            
+        }else{
+            print("no video")
+        }
+        
+    }
     
     
 }
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "熱門影片"
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videos.count
     }
@@ -71,9 +101,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PopularVideoTableViewCell", for: indexPath) as! PopularVideoTableViewCell
         let video = videos[indexPath.row]
-        cell.userName.text = video.user.name
-        cell.userID.text = "ID: \(video.user.id)"
-        cell.duration.text = "時間: \(video.duration) 秒"
+        cell.userName.text = "\(video.user.name)"
+        cell.userID.text = "ID：\(video.user.id)"
+        cell.duration.text = "時間：\(video.duration) 秒"
         
         if let imageUrl = URL(string: video.image) {
             cell.videoImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"), completed: { image, error, url, arg  in
@@ -81,6 +111,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     print("Image loading error: \(error.localizedDescription)")
                 }
             })
+            cell.videoImage.contentMode = .scaleAspectFill
+            cell.videoImage.clipsToBounds = true
+            cell.videoImage.layer.cornerRadius = 20
         }
         
         return cell
